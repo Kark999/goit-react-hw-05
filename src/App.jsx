@@ -1,7 +1,11 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, Routes, Route } from "react-router-dom";
+import clsx from "clsx";
+
+import HomePage from "./pages/HomePage/HomePage";
+import MoviesPage from "./pages/MoviesPage/MoviesPage";
+
 import "./App.css";
 import css from "./App.module.css";
-import clsx from "clsx";
 
 const getNavLinkClassName = ({ isActive }) =>
   clsx(css.navLink, { [css.active]: isActive });
@@ -19,6 +23,12 @@ function App() {
           </NavLink>
         </nav>
       </header>
+      <main>
+        <Routes>
+          <Route path="/home" element={<HomePage />} />
+          <Route path="/movies" element={<MoviesPage />} />
+        </Routes>
+      </main>
     </div>
   );
 }
