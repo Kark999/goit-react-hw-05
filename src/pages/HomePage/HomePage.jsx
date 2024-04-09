@@ -1,8 +1,11 @@
 import { useEffect, useState } from "react";
 import { getMovies } from "../../services/api";
+import { ErrorMessage } from "formik";
+import MoviesList from "../../components/MoviesList/MoviesList";
 
 const HomePage = () => {
   const [movies, setMovies] = useState(null);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchMovies = async () => {
@@ -12,7 +15,7 @@ const HomePage = () => {
 
         setMovies(response.results);
       } catch (error) {
-        console.log("error: ", error);
+        setIsError(true);
       }
     };
     fetchMovies();
@@ -21,16 +24,8 @@ const HomePage = () => {
   return (
     <div>
       <h1>Trending today</h1>
-      <ul>
-        {Array.isArray(movies) &&
-          movies.map((movie) => {
-            return (
-              <li key={movie.id}>
-                <h3>{movie.title}</h3>
-              </li>
-            );
-          })}
-      </ul>
+      {movies && <MoviesList movies={movies} />}
+      {isError && <ErrorMessage />}
     </div>
   );
 };

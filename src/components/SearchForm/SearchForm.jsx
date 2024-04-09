@@ -4,13 +4,13 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 
 const initialValues = { searchTerm: "" };
 
-const SearchForm = ({ onsearchQuery }) => {
+const SearchForm = ({ onSearchQuery }) => {
   const handleSubmit = (values) => {
     if (!values.searchTerm) {
       toast.error("Please enter a search term");
       return;
     }
-    onsearchQuery(values.searchTerm);
+    onSearchQuery(values.searchTerm);
   };
 
   return (

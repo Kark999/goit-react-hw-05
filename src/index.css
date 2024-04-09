@@ -13,8 +13,8 @@ body {
   line-height: 1.5;
   width: 100vw;
 }
-ul,
-li,
+/* ul,
+li, */
 input {
   list-style: none;
   margin: 0;
