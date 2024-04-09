@@ -1,0 +1,48 @@
+.form {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  gap: 4px;
+}
+
+.field {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.5; /* 150% */
+  letter-spacing: 0.04em;
+  height: 32px;
+  border: 1px solid gray;
+  border-radius: 4px;
+  outline: none;
+  transition: border ease;
+}
+.field:active,
+:focus {
+  border: 1px solid blue;
+}
+
+.submitBtn {
+  display: flex;
+  padding: 4px 8px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  background-color: #d1d0d0;
+  color: #000;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5; /* 150% */
+  letter-spacing: 0.04em;
+  border: none;
+  height: 32px;
+}
+.error {
+  color: rgb(221, 7, 7);
+}
