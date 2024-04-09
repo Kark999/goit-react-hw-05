@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMovies } from "../../services/api";
-import { ErrorMessage } from "formik";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";
 import MoviesList from "../../components/MoviesList/MoviesList";
 

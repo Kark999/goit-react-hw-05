@@ -2,33 +2,37 @@ import SearchForm from "../../components/SearchForm/SearchForm";
 import { Toaster } from "react-hot-toast";
 import { searchMovies } from "../../services/api";
 import { useEffect, useState } from "react";
-import { ErrorMessage } from "formik";
+import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Loader from "../../components/Loader/Loader";
 
 const MoviesPage = () => {
-  const [query, setQuery] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [movies, setMovies] = useState(null); // Оновлений стан для зберігання результатів запиту
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    if (!query.length) return;
     const fetchMoviesByQuery = async () => {
       try {
         setIsLoading(true);
-        const data = await searchMovies(query);
-        setQuery(data.results);
+        const data = await searchMovies(searchTerm);
+        console.log("data: ", data);
+        setMovies(data.results); // Оновлення стану movies з результатами запиту
       } catch (error) {
         setIsError(true);
       } finally {
         setIsLoading(false);
       }
     };
-    fetchMoviesByQuery();
-  }, [query]);
 
-  const onSearchQuery = (searchTerm) => {
-    setQuery(searchTerm);
+    if (searchTerm) {
+      fetchMoviesByQuery();
+    }
+  }, [searchTerm]);
+
+  const handleSearch = (term) => {
+    setSearchTerm(term);
   };
 
   return (
@@ -49,10 +53,10 @@ const MoviesPage = () => {
         position="top-center"
         reverseOrder={false}
       />
-      <SearchForm onSearchQuery={onSearchQuery} />
+      <SearchForm onSearchQuery={handleSearch} />
       {isLoading && <Loader />}
       {isError && <ErrorMessage />}
-      {query && <MoviesList movies={query} />}
+      {movies && <MoviesList movies={movies} />}
     </div>
   );
 };
