@@ -8,7 +8,7 @@ const MoviesList = ({ movies }) => {
         {Array.isArray(movies) &&
           movies.map((movie) => (
             <li key={movie.id}>
-              <Link to={`/movies/${movie.Id}`} state="movieId">
+              <Link to={`/movies/${movie.id}`} state="movieId">
                 {movie.title}
               </Link>
             </li>
