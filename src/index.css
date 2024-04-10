@@ -15,7 +15,8 @@ body {
 }
 /* ul,
 li, */
-input {
+input,
+._navLink {
   list-style: none;
   margin: 0;
   padding: 0;

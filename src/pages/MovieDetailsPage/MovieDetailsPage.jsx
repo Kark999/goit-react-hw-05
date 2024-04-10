@@ -1,25 +1,35 @@
 import { Link, useParams, Route, Routes } from "react-router-dom";
 import MovieCast from "../../components/MovieCast/MovieCast";
 import MovieReviews from "../../components/MovieReviews/MovieReviews";
+import css from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   return (
     <div>
-      <div>
+      <div className={css.movieDescription}>
         <Link to={"/"}>Go back</Link>
         <img src="" alt="" />
-        <h2>Movie title: {movieId}</h2>
-        <p>User score:</p>
-        <h3>Overview</h3>
-        <p>Movie description</p>
-        <h3>Genres:</h3>
-        <p>Genre</p>
+        <div className={css.description}>
+          <h2>Movie title: {movieId}</h2>
+          <p>User score:</p>
+          <h3>Overview</h3>
+          <p>Movie description</p>
+          <h3>Genres:</h3>
+          <p>Genre</p>
+        </div>
       </div>
-      <div>
+      <div className={css.information}>
         <h3>Additional information</h3>
-        <Link to="cast">Cast</Link>
-        <Link to="review">Review</Link>
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="review">Review</Link>
+          </li>
+        </ul>
+
         <Routes>
           <Route path="cast" element={<MovieCast />} />
           <Route path="review" element={<MovieReviews />} />

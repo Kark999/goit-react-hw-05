@@ -8,7 +8,13 @@ const MoviesList = ({ movies }) => {
         {Array.isArray(movies) &&
           movies.map((movie) => (
             <li key={movie.id}>
-              <a href={movie.backdrop_path}>{movie.title}</a>
+              <a
+                target="_blank"
+                rel="noopener noreferrer"
+                href={movie.backdrop_path}
+              >
+                {movie.title}
+              </a>
             </li>
           ))}
       </ul>

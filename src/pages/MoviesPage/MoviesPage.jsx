@@ -8,7 +8,7 @@ import Loader from "../../components/Loader/Loader";
 
 const MoviesPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
-  const [movies, setMovies] = useState(null); // Оновлений стан для зберігання результатів запиту
+  const [movies, setMovies] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +18,7 @@ const MoviesPage = () => {
         setIsLoading(true);
         const data = await searchMovies(searchTerm);
         console.log("data: ", data);
-        setMovies(data.results); // Оновлення стану movies з результатами запиту
+        setMovies(data);
       } catch (error) {
         setIsError(true);
       } finally {

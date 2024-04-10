@@ -2,6 +2,7 @@ import axios from "axios";
 
 const options = {
   method: "GET",
+  params: { language: "en-US" },
   headers: {
     accept: "application/json",
     Authorization:
@@ -9,16 +10,16 @@ const options = {
   },
 };
 
-const url = "https://api.themoviedb.org";
-const trending = "/3/trending/movie/day?language=en-US";
-const search = "/3/search/movie?include_adult=false&language=en-US&page=1";
+const url = "https://api.themoviedb.org/3";
+const trending = "/trending/movie/day";
+const search = "/search/movie";
 
 export const getMovies = async () => {
   const { data } = await axios.get(url + trending, options);
-  return data;
+  return data.results;
 };
 
 export const searchMovies = async (query = "") => {
-  const { data } = await axios.get(url + search + `&query=${query}`, options);
-  return data;
+  const { data } = await axios.get(url + search + `?query=${query}`, options);
+  return data.results;
 };
