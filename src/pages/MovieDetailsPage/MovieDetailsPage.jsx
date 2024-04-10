@@ -5,6 +5,7 @@ import css from "./MovieDetailsPage.module.css";
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
+
   return (
     <div>
       <div className={css.movieDescription}>

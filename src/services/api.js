@@ -13,6 +13,7 @@ const options = {
 const url = "https://api.themoviedb.org/3";
 const trending = "/trending/movie/day";
 const search = "/search/movie";
+const movieID = "/movie/movie_id";
 
 export const getMovies = async () => {
   const { data } = await axios.get(url + trending, options);
@@ -21,5 +22,10 @@ export const getMovies = async () => {
 
 export const searchMovies = async (query = "") => {
   const { data } = await axios.get(url + search + `?query=${query}`, options);
+  return data.results;
+};
+
+export const searchMovieId = async () => {
+  const { data } = await axios.get(url + movieID, options);
   return data.results;
 };

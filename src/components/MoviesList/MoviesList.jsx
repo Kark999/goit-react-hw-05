@@ -1,4 +1,4 @@
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import css from "./MoviesList.module.css";
 
 const MoviesList = ({ movies }) => {
@@ -8,13 +8,9 @@ const MoviesList = ({ movies }) => {
         {Array.isArray(movies) &&
           movies.map((movie) => (
             <li key={movie.id}>
-              <a
-                target="_blank"
-                rel="noopener noreferrer"
-                href={movie.backdrop_path}
-              >
+              <Link to={`/movies/${movie.Id}`} state="movieId">
                 {movie.title}
-              </a>
+              </Link>
             </li>
           ))}
       </ul>
@@ -23,9 +19,3 @@ const MoviesList = ({ movies }) => {
 };
 
 export default MoviesList;
-
-{
-  /* <Link to={`/movies/${movie.Id}`} state="movieId">
-                  See more details
-                </Link> */
-}
