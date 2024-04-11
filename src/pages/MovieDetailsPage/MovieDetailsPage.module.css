@@ -6,10 +6,17 @@
   padding: 8px;
   margin-bottom: 20px;
 }
+.moviePoster {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
 .description {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
+  align-items: flex-start;
+  justify-content: center;
   gap: 10px;
 }

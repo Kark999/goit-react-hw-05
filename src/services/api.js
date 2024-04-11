@@ -21,3 +21,13 @@ export const requestMovieById = async (movieId) => {
   const { data } = await axios.get(`/movie/${movieId}`);
   return data;
 };
+
+export const requestMovieCast = async (movieId) => {
+  const { data } = await axios.get(`/movie/${movieId}/credits`);
+  return data;
+};
+
+export const requestMovieReview = async (movieId) => {
+  const { data } = await axios.get(`/movie/${movieId}`);
+  return data;
+};

@@ -1,0 +1,11 @@
+.castList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 8px;
+}
+.castListCard {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}

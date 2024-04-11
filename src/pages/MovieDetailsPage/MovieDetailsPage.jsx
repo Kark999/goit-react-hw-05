@@ -1,8 +1,8 @@
-import { Link, useParams, Route, Routes } from "react-router-dom";
+import { Link, useParams, Route, Routes, useLocation } from "react-router-dom";
 import MovieCast from "../../components/MovieCast/MovieCast";
 import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import css from "./MovieDetailsPage.module.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { requestMovieById } from "../../services/api";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
@@ -17,7 +17,7 @@ const MovieDetailsPage = () => {
     async function fetchMovieId() {
       try {
         setIsLoading(true);
-        const data = requestMovieById(movieId);
+        const data = await requestMovieById(movieId);
         setMovieDetails(data);
         console.log("data: ", data);
       } catch (error) {
@@ -29,20 +29,37 @@ const MovieDetailsPage = () => {
     fetchMovieId();
   }, [movieId]);
 
+  const location = useLocation();
+  const backLink = useRef(location.state?.from ?? "/");
+
   return (
     <div>
       {isLoading && <Loader />}
       {movieDetails !== null && (
         <div className={css.movieDescription}>
-          <Link to={"/"}>Go back</Link>
-          <img src={movieDetails.poster_path} alt={movieDetails.title} />
+          <div className={css.moviePoster}>
+            <Link to={backLink.current}>Go back</Link>
+            {movieDetails.poster_path && (
+              <img
+                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                alt="poster"
+                width={250}
+              />
+            )}
+          </div>
           <div className={css.description}>
             <h2>{movieDetails.title}</h2>
             <p>User score: {movieDetails.vote_average}</p>
             <h3>Overview</h3>
             <p>Movie description: {movieDetails.overview}</p>
             <h3>Genres</h3>
-            <p>Genre: {movieDetails.genres}</p>
+            {movieDetails.genres && (
+              <p>
+                {movieDetails.genres.map((genre) => (
+                  <span key={genre.id}>{genre.name}, </span>
+                ))}
+              </p>
+            )}
           </div>
         </div>
       )}
