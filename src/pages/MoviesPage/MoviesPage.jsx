@@ -5,18 +5,22 @@ import { useEffect, useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import MoviesList from "../../components/MoviesList/MoviesList";
 import Loader from "../../components/Loader/Loader";
+import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  // const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const query = searchParams.get("query") ?? "";
 
   useEffect(() => {
     const fetchMoviesByQuery = async () => {
       try {
         setIsLoading(true);
-        const data = await searchMovies(searchTerm);
+        const data = await searchMovies(query);
         console.log("data: ", data);
         setMovies(data);
       } catch (error) {
@@ -26,13 +30,13 @@ const MoviesPage = () => {
       }
     };
 
-    if (searchTerm) {
+    if (query) {
       fetchMoviesByQuery();
     }
-  }, [searchTerm]);
+  }, [query]);
 
   const handleSearch = (term) => {
-    setSearchTerm(term);
+    setSearchParams({ query: term });
   };
 
   return (
