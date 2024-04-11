@@ -28,6 +28,6 @@ export const requestMovieCast = async (movieId) => {
 };
 
 export const requestMovieReview = async (movieId) => {
-  const { data } = await axios.get(`/movie/${movieId}`);
+  const { data } = await axios.get(`/movie/${movieId}/reviews`);
   return data;
 };

@@ -13,7 +13,7 @@ const MovieCast = () => {
 
   useEffect(() => {
     if (!movieId) return;
-    async function fetchMovieId() {
+    async function fetchMovieIdCast() {
       try {
         setIsLoading(true);
         const data = await requestMovieCast(movieId);
@@ -25,7 +25,7 @@ const MovieCast = () => {
         setIsLoading(false);
       }
     }
-    fetchMovieId();
+    fetchMovieIdCast();
   }, [movieId]);
 
   const defaultImg =
