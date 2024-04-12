@@ -8,11 +8,12 @@ import Loader from "../../components/Loader/Loader";
 import { useSearchParams } from "react-router-dom";
 
 const MoviesPage = () => {
-  // const [searchTerm, setSearchTerm] = useState("");
   const [movies, setMovies] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  // const location = useLocation();
+  // console.log("location: ", location);
 
   const query = searchParams.get("query") ?? "";
 

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+// import { useLocation } from "react-router-dom";
 import { getMovies } from "../../services/api";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
 import Loader from "../../components/Loader/Loader";

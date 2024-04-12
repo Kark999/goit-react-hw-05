@@ -1,17 +1,25 @@
 import { Link, useParams, Route, Routes, useLocation } from "react-router-dom";
-import MovieCast from "../../components/MovieCast/MovieCast";
-import MovieReviews from "../../components/MovieReviews/MovieReviews";
+// import MovieCast from "../../components/MovieCast/MovieCast";
+// import MovieReviews from "../../components/MovieReviews/MovieReviews";
 import css from "./MovieDetailsPage.module.css";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { requestMovieById } from "../../services/api";
 import Loader from "../../components/Loader/Loader";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
+
+const MovieCast = lazy(() => import("../../components/MovieCast/MovieCast"));
+const MovieReviews = lazy(() =>
+  import("../../components/MovieReviews/MovieReviews")
+);
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieDetails, setMovieDetails] = useState(null);
   const [isError, setIsError] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const location = useLocation();
+  console.log("location: from details", location);
+  const backLinkHref = useRef(location.state?.from ?? "/");
 
   useEffect(() => {
     async function fetchMovieId() {
@@ -29,8 +37,8 @@ const MovieDetailsPage = () => {
     fetchMovieId();
   }, [movieId]);
 
-  const location = useLocation();
-  const backLink = useRef(location.state?.from ?? "/");
+  const defaultImg =
+    "https://dl-media.viber.com/10/share/2/long/vibes/icon/image/0x0/95e0/5688fdffb84ff8bed4240bcf3ec5ac81ce591d9fa9558a3a968c630eaba195e0.jpg";
 
   return (
     <div>
@@ -38,10 +46,14 @@ const MovieDetailsPage = () => {
       {movieDetails !== null && (
         <div className={css.movieDescription}>
           <div className={css.moviePoster}>
-            <Link to={backLink.current}>Go back</Link>
+            <Link to={backLinkHref.current}>Go back</Link>
             {movieDetails.poster_path && (
               <img
-                src={`https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`}
+                src={
+                  movieDetails.poster_path
+                    ? `https://image.tmdb.org/t/p/w500/${movieDetails.poster_path}`
+                    : defaultImg
+                }
                 alt="poster"
                 width={250}
               />
@@ -73,11 +85,12 @@ const MovieDetailsPage = () => {
             <Link to="review">Review</Link>
           </li>
         </ul>
-
-        <Routes>
-          <Route path="cast" element={<MovieCast />} />
-          <Route path="review" element={<MovieReviews />} />
-        </Routes>
+        <Suspense>
+          <Routes>
+            <Route path="cast" element={<MovieCast />} />
+            <Route path="review" element={<MovieReviews />} />
+          </Routes>
+        </Suspense>
       </div>
       {isError && <ErrorMessage />}
     </div>
