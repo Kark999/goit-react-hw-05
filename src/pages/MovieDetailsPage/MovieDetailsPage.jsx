@@ -85,7 +85,7 @@ const MovieDetailsPage = () => {
             <Link to="review">Review</Link>
           </li>
         </ul>
-        <Suspense>
+        <Suspense fallback={<Loader />}>
           <Routes>
             <Route path="cast" element={<MovieCast />} />
             <Route path="review" element={<MovieReviews />} />
