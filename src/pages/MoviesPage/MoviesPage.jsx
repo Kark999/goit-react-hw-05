@@ -3,7 +3,7 @@ import { Toaster } from "react-hot-toast";
 import { searchMovies } from "../../services/api";
 import { useEffect, useState } from "react";
 import ErrorMessage from "../../components/ErrorMessage/ErrorMessage";
-import MoviesList from "../../components/MoviesList/MoviesList";
+import MoviesList from "../../components/MovieList/MovieList";
 import Loader from "../../components/Loader/Loader";
 import { useSearchParams } from "react-router-dom";
 
