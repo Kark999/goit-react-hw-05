@@ -31,17 +31,22 @@ const MovieReviews = () => {
   return (
     <div>
       {isLoading && <Loader />}
-      <ul className={css.reviewList}>
-        {Array.isArray(movieReviews) &&
-          movieReviews.map((movieReview) => (
+      {movieReviews && movieReviews.length > 0 ? (
+        <ul className={css.reviewList}>
+          {movieReviews.map((movieReview) => (
             <li className={css.reviewListCard} key={movieReview.id}>
               <p>
-                <b>Author</b>:{movieReview.author}
+                <b>Author</b>: {movieReview.author}
               </p>
               <p>{movieReview.content}</p>
             </li>
           ))}
-      </ul>
+        </ul>
+      ) : (
+        <p>
+          <b>We don&apos;t have any reviews for this movie!</b>
+        </p>
+      )}
       {isError && <ErrorMessage />}
     </div>
   );
