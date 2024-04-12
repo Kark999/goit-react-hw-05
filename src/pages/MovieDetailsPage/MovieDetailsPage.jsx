@@ -1,6 +1,5 @@
 import { Link, useParams, Route, Routes, useLocation } from "react-router-dom";
-// import MovieCast from "../../components/MovieCast/MovieCast";
-// import MovieReviews from "../../components/MovieReviews/MovieReviews";
+
 import css from "./MovieDetailsPage.module.css";
 import { useEffect, useState, useRef, lazy, Suspense } from "react";
 import { requestMovieById } from "../../services/api";
